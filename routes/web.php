@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('layouts.app');
 });
+
+Route::resource('posts', 'PostsController');
