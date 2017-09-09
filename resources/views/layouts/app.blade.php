@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/semantic.min.css" rel="stylesheet">
     @yield('style')
 
     <!-- Scripts -->
@@ -33,6 +34,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/semantic.min.js"></script>
     @yield('script')
 
 </body>

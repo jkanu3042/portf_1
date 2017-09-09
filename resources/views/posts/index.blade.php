@@ -3,7 +3,7 @@
 @section('content')
     <ul class="list-group">
         @forelse($posts as $post)
-            <li>
+            <li class="list-group-item">
                 <a href="{{route('posts.show', $post->id)}}">{{$post->content}}</a>
                 <small>by {{$post->user->name}}</small>
             </li>
