@@ -13,8 +13,8 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/semantic.min.css" rel="stylesheet">
-    @yield('style')
 
+@yield('style')
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -26,7 +26,9 @@
 <body id="app-layout">
     @include('layouts.partial.navigation')
 
+
     <div class="container" id="app">
+        @include('flash::message')
         @yield('content')
     </div>
 
