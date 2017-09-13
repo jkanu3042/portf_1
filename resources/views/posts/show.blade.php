@@ -5,10 +5,10 @@
         <h4>자유게시판<small>/ {{$post->title}}</small></h4>
     </div>
     @include('posts.partial.post', compact('post'))
-    <p>
-        {{$post->content}}
-    </p>
 
+    <div class="ui raised segment">
+        <p>{{$post->content}}</p>
+    </div>
 
     <div class="text-center">
         @can('update', $post)
