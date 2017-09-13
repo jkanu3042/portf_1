@@ -10,7 +10,7 @@
     </p>
 
 
-    <div class="text-center action__article">
+    <div class="text-center">
         @can('update', $post)
             <a href="{{ route('posts.edit',$post->id) }}" class="btn btn-info">
                 <i class="fa fa-pencil"></i>
@@ -29,7 +29,7 @@
         </a>
     </div>
 
-    <div class="container__comment">
+    <div>
         @include('comments.index')
     </div>
 @endsection

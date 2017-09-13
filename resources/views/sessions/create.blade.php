@@ -2,7 +2,7 @@
 
 @section('content')
     <div id="login_section">
-    <form action="{{ route('sessions.store') }}" method="POST" role="form" class="form__auth">
+    <form action="{{ route('sessions.store') }}" method="POST" role="form">
         {!! csrf_field() !!}
 
         <div class="form-group">
@@ -16,8 +16,6 @@
                 <strong><i class="fa fa-facebook"></i> Facebook 계정으로 로그인하기.</strong>
             </a>
         </div>
-
-
 
         <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
             <input type="email" name="email" class="form-control" placeholder="이메일" value="{{ old('email') }}"

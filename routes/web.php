@@ -13,9 +13,15 @@
 
 Route::get('/', function () {
     return view('layouts.app');
-})->name('home');
+});
+
+Route::get('/home',
+    'HomeController@index'
+)->name('home');
 
 Route::resource('posts', 'PostsController');
+Route::resource('comments', 'CommentsController', ['only' => ['update', 'destroy']]);
+Route::resource('posts.comments', 'CommentsController', ['only' => ['store']]);
 
 
 /* 소셜 로그인 */
