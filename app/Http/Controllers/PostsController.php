@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+
     public function index()
     {
         $posts = \App\Post::latest()->paginate(5);
@@ -18,71 +20,55 @@ class PostsController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $post = new \App\Post;
+        return view('posts.create', compact('post'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(\App\Http\Requests\PostsRequest $request)
     {
-        //
+        $post = $request->user()->posts()->create($request->all());
+
+        if (! $post) {
+            flash()->message('오류가 발생했습니다. 글을 작성하지 못했습니다.');
+            return back()->withInput();
+        }
+
+        flash()->success('작성하신 글이 저장되었습니다.');
+
+        return redirect(route('posts.index'));
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(\App\Post $post)
     {
-        $post = \App\Post::findOrFail($id);
-
         return view('posts.show', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit(\App\Post $post)
     {
-        //
+
+        return view('posts.edit', compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
 
+    public function update(\App\Http\Requests\PostsRequest $request, \App\Post $post)
+    {
+        $this->authorize('update', $post);
+        $post->update($request->all());
+        flash()->success('수정 되었습니다.');
+
+        return redirect(route('posts.show', $post->id));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(\App\Post $post)
     {
-        //
+        $this->authorize('destroy', $post);
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }

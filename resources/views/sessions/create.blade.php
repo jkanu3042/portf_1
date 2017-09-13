@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <div id="login_section">
     <form action="{{ route('sessions.store') }}" method="POST" role="form" class="form__auth">
         {!! csrf_field() !!}
 
@@ -61,5 +62,15 @@
             </p>
         </div>
     </form>
+    </div>
+
+
+    <style>
+        #login_section {
+            position:absolute;
+            left : 300px;
+            top: 100px;
+        }
+    </style>
 @endsection
 

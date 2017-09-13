@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <h1 class="text-center">회원가입</h1>
     <form action="{{ route('users.store') }}" method="POST" role="form" class="form__auth">
         {!! csrf_field() !!}
 

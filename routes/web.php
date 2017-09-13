@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('layouts.app');
-});
+})->name('home');
 
 Route::resource('posts', 'PostsController');
 
